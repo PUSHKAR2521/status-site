@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Status | B A C</title>
+    <link rel="shortcut icon" href="images/logo.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base styles */
+        .glass {
+            background: rgba(17, 25, 40, 0.75);
+            backdrop-filter: blur(20px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Enhanced gradient background */
+        .gradient-bg {
+            background: linear-gradient(-45deg, 
+                #020617,  /* Darker slate */
+                #1a0f2e,  /* Deep violet */
+                #1e1b4b,  /* Dark indigo */
+                #0c1e4a   /* Midnight blue */
+            );
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .gradient-bg::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 100% 0%, rgba(244, 63, 94, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.08) 0%, transparent 50%);
+            animation: glow 20s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+
+        .gradient-bg::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239BA1A6' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+        }
+
+        /* Enhance glass effect for better contrast with new background */
+        .glass {
+            background: rgba(17, 25, 40, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 32px 0 rgba(0, 0, 0, 0.37),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+    </style>
+    
+    <style>
+        /* Add these new animations */
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    
+        @keyframes glow {
+            0% { opacity: 0.6; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.6; }
+        }
+    
+        @keyframes terminal-scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    
+        @keyframes pulse-status {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    
+        /* Add these classes */
+        .operational-icon {
+            animation: pulse-status 2s ease-in-out infinite;
+        }
+    
+        .status-badge {
+            position: relative;
+            overflow: hidden;
+        }
+    
+        .status-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            animation: shine 3s infinite;
+        }
+    
+        @keyframes shine {
+            100% { left: 200%; }
+        }
+    
+        .uptime-bar {
+            position: relative;
+            overflow: hidden;
+        }
+    
+        .uptime-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+    
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+    
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => console.log('ServiceWorker registered'))
+                .catch(err => console.log('ServiceWorker registration failed: ', err));
+        }
+
+        // Add offline detection
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+
+        function updateOnlineStatus() {
+            const statusDiv = document.getElementById('statusOverview');
+            if (!navigator.onLine) {
+                statusDiv.innerHTML = `
+                    <div class="glass rounded-xl p-8 terminal-status border-red-400/20">
+                        <div class="flex items-center space-x-3">
+                            <div class="text-red-400 text-2xl z-10">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <h1 class="text-2xl font-semibold text-red-400">
+                                Status Page Unreachable
+                            </h1>
+                        </div>
+                        <p class="mt-4 text-gray-400">
+                            The status page is currently unreachable. This might be due to:
+                            <ul class="list-disc ml-6 mt-2">
+                                <li>Your internet connection</li>
+                                <li>Service suspension</li>
+                                <li>Temporary maintenance</li>
+                            </ul>
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // Initial check
+        updateOnlineStatus();
+    </script>
+    </head>
+    <!-- Update the body wrapper -->
+    <body class="gradient-bg min-h-screen text-gray-100">
+        <!-- Header -->
+        <header class="glass border-b border-gray-700 sticky top-0 z-50">
+            <div class="container mx-auto px-4 py-6 max-w-6xl">
+                <div class="flex justify-between items-center">
+                    <div class="text-xl font-bold tracking-wider flex items-center space-x-2">
+                        <div class="flex space-x-1">
+                            <span class="text-blue-400">B</span>
+                            <span class="text-purple-400">A</span>
+                            <span class="text-emerald-400">C</span>
+                        </div>
+                        <div class="h-4 w-px bg-gray-700"></div>
+                        <span class="text-gray-400 text-lg font-medium">Status</span>
+                    </div>
+                    <a href="#" class="px-4 py-2 rounded-lg glass hover:bg-gray-800 transition-all duration-300 flex items-center space-x-3 group">
+                        <i class="fas fa-history group-hover:rotate-[-30deg] transition-transform duration-300"></i>
+                        <span class="text-gray-400 group-hover:text-white">History</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+    
+        <!-- Main Content -->
+        <div class="container mx-auto px-4 py-12 max-w-6xl">
+            <!-- Status Overview -->
+            <div class="mb-12" id="statusOverview">
+                <% const allOperational = Array.isArray(sites) && sites.length > 0 ? 
+                    sites.every(site => site.status === 'operational') : 
+                    true; 
+                %>
+                <div class="glass rounded-xl p-8 terminal-status">
+                    <div class="flex items-center space-x-3">
+                        <div class="<%= allOperational ? 'text-green-400 operational-icon relative' : 'text-red-400' %> text-2xl z-10">
+                            <i class="fas <%= allOperational ? 'fa-check-circle' : 'fa-exclamation-circle' %>"></i>
+                        </div>
+                        <h1 class="text-2xl font-semibold">
+                            <%= allOperational ? 'All Systems Operational' : 'System Incidents Detected' %>
+                        </h1>
+                    </div>
+                    <div class="flex justify-between items-center mt-2">
+                        <p class="text-gray-400">Last updated: <%= new Date().toLocaleString() %></p>
+                        <p class="text-gray-400">Next check in <span id="countdown">60</span> seconds</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Services Status -->
+            <div class="glass rounded-xl overflow-hidden mb-12" id="servicesGrid">
+                <div class="px-6 py-4 border-b border-gray-700">
+                    <h2 class="text-lg font-semibold">Services</h2>
+                </div>
+                <div class="divide-y divide-gray-700">
+                    <% sites.forEach((site, index) => { %>
+                        <div class="px-6 py-4 status-card opacity-0" data-index="<%= index %>">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="<%= 
+                                        site.status === 'operational' ? 'text-green-400' : 
+                                        site.status === 'degraded' ? 'text-yellow-400' : 
+                                        'text-red-400' %>">
+                                        <i class="fas <%= 
+                                            site.status === 'operational' ? 'fa-check-circle' : 
+                                            site.status === 'degraded' ? 'fa-exclamation-triangle' : 
+                                            'fa-times-circle' %>"></i>
+                                    </div>
+                                    <h3 class="font-medium"><%= site.name %></h3>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <span class="text-sm text-gray-400"><%= site.responseTime %>ms</span>
+                                    <span class="px-2 py-1 text-xs rounded-full glass <%= 
+                                        site.status === 'operational' ? 'text-green-400' : 
+                                        site.status === 'degraded' ? 'text-yellow-400' : 
+                                        'text-red-400' %>">
+                                        <%= site.status.charAt(0).toUpperCase() + site.status.slice(1) %>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                                    <div class="h-1.5 rounded-full <%= 
+                                        site.status === 'operational' ? 'bg-green-400' : 
+                                        site.status === 'degraded' ? 'bg-yellow-400' : 
+                                        'bg-red-400' %>">
+                                    </div>
+                                </div>
+                                <p class="mt-1 text-sm text-gray-400">
+                                    <%= site.uptime %>% uptime
+                                </p>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+    
+            <!-- Incidents -->
+            <div class="glass rounded-xl overflow-hidden mb-12" id="incidentsSection">
+                <div class="px-6 py-4 border-b border-gray-700">
+                    <h2 class="text-lg font-semibold">Past Incidents</h2>
+                </div>
+                <div class="divide-y divide-gray-700">
+                    <% if (incidents.length === 0) { %>
+                        <div class="px-6 py-4 text-gray-400">
+                            No incidents reported in the last 90 days.
+                        </div>
+                    <% } else { %>
+                        <% incidents.forEach((incident, index) => { %>
+                            <div class="px-6 py-4 incident-item opacity-0" data-index="<%= index %>">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-medium"><%= incident.site.name %></h4>
+                                        <p class="mt-1 text-sm text-gray-400"><%= incident.message %></p>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <span class="px-2 py-1 text-xs rounded-full glass <%= 
+                                            incident.status === 'resolved' ? 'text-green-400' :
+                                            incident.status === 'investigating' ? 'text-yellow-400' :
+                                            'text-blue-400' %>">
+                                            <%= incident.status.charAt(0).toUpperCase() + incident.status.slice(1) %>
+                                        </span>
+                                        <time class="mt-1 text-sm text-gray-400">
+                                            <%= new Date(incident.startTime).toLocaleString() %>
+                                        </time>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </body>
+    <!-- Update GSAP animations -->
+    <script>
+        gsap.to("#statusOverview", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out"
+        });
+    
+        gsap.to("#servicesGrid", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.3,
+            ease: "power3.out"
+        });
+    
+        gsap.to(".status-card", {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power3.out"
+        });
+    
+        gsap.to("#incidentsSection", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.6,
+            ease: "power3.out"
+        });
+        
+        gsap.to(".incident-item", {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power3.out"
+        });
+    
+        // Add countdown timer
+        let countdown = 60;
+        const countdownElement = document.getElementById('countdown');
+        setInterval(() => {
+            countdown = countdown <= 0 ? 60 : countdown - 1;
+            countdownElement.textContent = countdown;
+        }, 1000);
+    </script>
+</html>

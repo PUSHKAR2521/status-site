@@ -1,0 +1,97 @@
+:root {
+    --operational-color: #2ecc71;
+    --degraded-color: #f1c40f;
+    --down-color: #e74c3c;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f6fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.overall-status {
+    margin: 1rem 0;
+}
+
+.status-indicator {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.status-indicator.operational {
+    background-color: var(--operational-color);
+    color: white;
+}
+
+.status-indicator.incident {
+    background-color: var(--down-color);
+    color: white;
+}
+
+.sites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.site-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.site-card.operational {
+    border-left: 4px solid var(--operational-color);
+}
+
+.site-card.degraded {
+    border-left: 4px solid var(--degraded-color);
+}
+
+.site-card.down {
+    border-left: 4px solid var(--down-color);
+}
+
+.incidents {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.incident-card {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.incident-card:last-child {
+    border-bottom: none;
+}
+
+.metrics {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.last-checked {
+    font-size: 0.8rem;
+    color: #999;
+}
