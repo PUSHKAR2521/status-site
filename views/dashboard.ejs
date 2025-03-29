@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,12 +20,16 @@
 
         /* Enhanced gradient background */
         .gradient-bg {
-            background: linear-gradient(-45deg, 
-                #020617,  /* Darker slate */
-                #1a0f2e,  /* Deep violet */
-                #1e1b4b,  /* Dark indigo */
-                #0c1e4a   /* Midnight blue */
-            );
+            background: linear-gradient(-45deg,
+                    #020617,
+                    /* Darker slate */
+                    #1a0f2e,
+                    /* Deep violet */
+                    #1e1b4b,
+                    /* Dark indigo */
+                    #0c1e4a
+                    /* Midnight blue */
+                );
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             position: relative;
@@ -38,7 +43,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 100% 0%, rgba(244, 63, 94, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 100% 100%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
@@ -63,9 +68,11 @@
             0% {
                 background-position: 0% 50%;
             }
+
             50% {
                 background-position: 100% 50%;
             }
+
             100% {
                 background-position: 0% 50%;
             }
@@ -76,10 +83,12 @@
                 opacity: 0.5;
                 transform: scale(1);
             }
+
             50% {
                 opacity: 0.7;
                 transform: scale(1.05);
             }
+
             100% {
                 opacity: 0.5;
                 transform: scale(1);
@@ -91,47 +100,76 @@
             background: rgba(17, 25, 40, 0.85);
             backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
+            box-shadow:
                 0 8px 32px 0 rgba(0, 0, 0, 0.37),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.05);
         }
     </style>
-    
+
     <style>
         /* Add these new animations */
         @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
-    
+
         @keyframes glow {
-            0% { opacity: 0.6; }
-            50% { opacity: 0.7; }
-            100% { opacity: 0.6; }
+            0% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 0.6;
+            }
         }
-    
+
         @keyframes terminal-scan {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
         }
-    
+
         @keyframes pulse-status {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
-    
+
         /* Add these classes */
         .operational-icon {
             animation: pulse-status 2s ease-in-out infinite;
         }
-    
+
         .status-badge {
             position: relative;
             overflow: hidden;
         }
-    
+
         .status-badge::after {
             content: '';
             position: absolute;
@@ -139,24 +177,24 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.1),
-                transparent
-            );
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.1),
+                    transparent);
             animation: shine 3s infinite;
         }
-    
+
         @keyframes shine {
-            100% { left: 200%; }
+            100% {
+                left: 200%;
+            }
         }
-    
+
         .uptime-bar {
             position: relative;
             overflow: hidden;
         }
-    
+
         .uptime-bar::after {
             content: '';
             position: absolute;
@@ -164,21 +202,24 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.1),
-                transparent
-            );
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.1),
+                    transparent);
             animation: shimmer 2s infinite;
         }
-    
+
         @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
         }
     </style>
-    
+
     <script>
         // Register Service Worker
         if ('serviceWorker' in navigator) {
@@ -220,130 +261,226 @@
         // Initial check
         updateOnlineStatus();
     </script>
-    </head>
-    <!-- Update the body wrapper -->
-    <body class="gradient-bg min-h-screen text-gray-100">
-        <!-- Header -->
-        <header class="glass border-b border-gray-700 sticky top-0 z-50">
-            <div class="container mx-auto px-4 py-6 max-w-6xl">
-                <div class="flex justify-between items-center">
-                    <div class="text-xl font-bold tracking-wider flex items-center space-x-2">
-                        <div class="flex space-x-1">
-                            <span class="text-blue-400">B</span>
-                            <span class="text-purple-400">A</span>
-                            <span class="text-emerald-400">C</span>
-                        </div>
-                        <div class="h-4 w-px bg-gray-700"></div>
-                        <span class="text-gray-400 text-lg font-medium">Status</span>
+</head>
+<!-- Update the body wrapper -->
+
+<body class="gradient-bg min-h-screen text-gray-100">
+    <!-- Header -->
+    <header class="glass border-b border-gray-700 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-6 max-w-6xl">
+            <div class="flex justify-between items-center">
+                <div class="text-xl font-bold tracking-wider flex items-center space-x-2">
+                    <div class="flex space-x-1">
+                        <span class="text-blue-400">B</span>
+                        <span class="text-purple-400">A</span>
+                        <span class="text-emerald-400">C</span>
                     </div>
-                    <a href="#" class="px-4 py-2 rounded-lg glass hover:bg-gray-800 transition-all duration-300 flex items-center space-x-3 group">
-                        <i class="fas fa-history group-hover:rotate-[-30deg] transition-transform duration-300"></i>
-                        <span class="text-gray-400 group-hover:text-white">History</span>
-                    </a>
+                    <div class="h-4 w-px bg-gray-700"></div>
+                    <span class="text-gray-400 text-lg font-medium">Status</span>
+                </div>
+                <a href="#"
+                    class="px-4 py-2 rounded-lg glass hover:bg-gray-800 transition-all duration-300 flex items-center space-x-3 group">
+                    <i class="fas fa-history group-hover:rotate-[-30deg] transition-transform duration-300"></i>
+                    <span class="text-gray-400 group-hover:text-white">History</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-12 max-w-6xl">
+        <!-- Status Overview -->
+        <div class="mb-12" id="statusOverview">
+            <% const allOperational = sites.every(site => site.status === 'operational'); %>
+            <div class="glass rounded-xl p-8 terminal-status">
+                <div class="flex items-center space-x-3">
+                    <div class="<%= allOperational ? 'text-green-400 operational-icon relative' : 'text-red-400' %> text-2xl z-10">
+                        <i class="fas <%= allOperational ? 'fa-check-circle' : 'fa-exclamation-circle' %>"></i>
+                    </div>
+                    <h1 class="text-2xl font-semibold">
+                        <%= allOperational ? 'All Systems Operational' : 'System Incidents Detected' %>
+                    </h1>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                    <p class="text-gray-400">Last updated: <%= new Date().toLocaleString() %></p>
+                    <p class="text-gray-400">Next check in <span id="countdown">60</span> seconds</p>
                 </div>
             </div>
-        </header>
-    
-        <!-- Main Content -->
-        <div class="container mx-auto px-4 py-12 max-w-6xl">
-            <!-- Status Overview -->
-            <div class="mb-12" id="statusOverview">
-                <% const allOperational = Array.isArray(sites) && sites.length > 0 ? 
-                    sites.every(site => site.status === 'operational') : 
-                    true; 
-                %>
-                <div class="glass rounded-xl p-8 terminal-status">
-                    <div class="flex items-center space-x-3">
-                        <div class="<%= allOperational ? 'text-green-400 operational-icon relative' : 'text-red-400' %> text-2xl z-10">
-                            <i class="fas <%= allOperational ? 'fa-check-circle' : 'fa-exclamation-circle' %>"></i>
-                        </div>
-                        <h1 class="text-2xl font-semibold">
-                            <%= allOperational ? 'All Systems Operational' : 'System Incidents Detected' %>
-                        </h1>
-                    </div>
-                    <div class="flex justify-between items-center mt-2">
-                        <p class="text-gray-400">Last updated: <%= new Date().toLocaleString() %></p>
-                        <p class="text-gray-400">Next check in <span id="countdown">60</span> seconds</p>
-                    </div>
-                </div>
+        </div>
+
+        <!-- Scheduled Maintenance -->
+        <div class="glass rounded-xl overflow-hidden mb-12" id="maintenanceSection">
+            <div class="px-6 py-4 border-b border-gray-700">
+                <h2 class="text-lg font-semibold flex items-center space-x-2">
+                    <i class="fas fa-tools text-purple-400"></i>
+                    <span>Scheduled Maintenance</span>
+                </h2>
             </div>
-    
-            <!-- Services Status -->
-            <div class="glass rounded-xl overflow-hidden mb-12" id="servicesGrid">
-                <div class="px-6 py-4 border-b border-gray-700">
-                    <h2 class="text-lg font-semibold">Services</h2>
-                </div>
-                <div class="divide-y divide-gray-700">
-                    <% sites.forEach((site, index) => { %>
-                        <div class="px-6 py-4 status-card opacity-0" data-index="<%= index %>">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <div class="<%= 
-                                        site.status === 'operational' ? 'text-green-400' : 
-                                        site.status === 'degraded' ? 'text-yellow-400' : 
-                                        'text-red-400' %>">
-                                        <i class="fas <%= 
-                                            site.status === 'operational' ? 'fa-check-circle' : 
-                                            site.status === 'degraded' ? 'fa-exclamation-triangle' : 
-                                            'fa-times-circle' %>"></i>
-                                    </div>
-                                    <h3 class="font-medium"><%= site.name %></h3>
-                                </div>
-                                <div class="flex items-center space-x-4">
-                                    <span class="text-sm text-gray-400"><%= site.responseTime %>ms</span>
-                                    <span class="px-2 py-1 text-xs rounded-full glass <%= 
-                                        site.status === 'operational' ? 'text-green-400' : 
-                                        site.status === 'degraded' ? 'text-yellow-400' : 
-                                        'text-red-400' %>">
-                                        <%= site.status.charAt(0).toUpperCase() + site.status.slice(1) %>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="mt-2">
-                                <div class="w-full bg-gray-700 rounded-full h-1.5">
-                                    <div class="h-1.5 rounded-full <%= 
-                                        site.status === 'operational' ? 'bg-green-400' : 
-                                        site.status === 'degraded' ? 'bg-yellow-400' : 
-                                        'bg-red-400' %>">
+            <div class="divide-y divide-gray-700">
+                <% if (!maintenances || maintenances.length === 0) { %>
+                    <div class="px-6 py-8 text-center text-gray-400">
+                        <i class="fas fa-calendar-check text-4xl mb-3"></i>
+                        <p>No scheduled maintenance at this time.</p>
+                    </div>
+                <% } else { %>
+                    <% maintenances.forEach((maintenance, index) => { %>
+                        <div class="px-6 py-6 maintenance-item opacity-0 hover:bg-gray-800/30 transition-all duration-300" data-index="<%= index %>">
+                            <div class="flex flex-col space-y-4">
+                                <!-- Header -->
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-medium text-lg text-white flex items-center space-x-2">
+                                            <span><%= maintenance.title %></span>
+                                            <span class="px-3 py-1 text-xs rounded-full glass <%= 
+                                                maintenance.status === 'scheduled' ? 'text-blue-400 border border-blue-400/20' :
+                                                maintenance.status === 'in-progress' ? 'text-yellow-400 border border-yellow-400/20' :
+                                                'text-green-400 border border-green-400/20' %>">
+                                                <%= maintenance.status.charAt(0).toUpperCase() + maintenance.status.slice(1) %>
+                                            </span>
+                                        </h4>
+                                        <p class="text-sm text-gray-400 mt-1">
+                                            <i class="fas fa-server mr-2"></i><%= maintenance.site.name %>
+                                        </p>
                                     </div>
                                 </div>
-                                <p class="mt-1 text-sm text-gray-400">
-                                    <%= site.uptime %>% uptime
+
+                                <!-- Description -->
+                                <p class="text-sm text-gray-300 bg-gray-800/30 rounded-lg p-4 border border-gray-700">
+                                    <%= maintenance.description %>
                                 </p>
+
+                                <!-- Timeline -->
+                                <div class="flex items-center space-x-6 text-sm">
+                                    <div class="flex items-center space-x-2 text-blue-400">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>Starts: <%= new Date(maintenance.startTime).toLocaleString() %></span>
+                                    </div>
+                                    <div class="flex items-center space-x-2 text-purple-400">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Ends: <%= new Date(maintenance.endTime).toLocaleString() %></span>
+                                    </div>
+                                </div>
+
+                                <% if (maintenance.status === 'in-progress') { %>
+                                    <div class="mt-2">
+                                        <% const start = new Date(maintenance.startTime).getTime();
+                                           const end = new Date(maintenance.endTime).getTime();
+                                           const current = new Date().getTime();
+                                           const progress = Math.min(100, Math.max(0, ((current - start) / (end - start)) * 100)); %>
+                                        <div class="w-full bg-gray-700/50 rounded-full h-2 overflow-hidden">
+                                            <div class="h-full bg-yellow-400/80 transition-all duration-1000 rounded-full"
+                                                 style="width: <%= progress %>%"></div>
+                                        </div>
+                                        <p class="text-xs text-gray-400 mt-1 text-right"><%= Math.round(progress) %>% complete</p>
+                                    </div>
+                                <% } %>
                             </div>
                         </div>
                     <% }) %>
-                </div>
+                <% } %>
             </div>
-    
-            <!-- Incidents -->
-            <div class="glass rounded-xl overflow-hidden mb-12" id="incidentsSection">
+        </div>
+
+        <!-- Services Status -->
+        <div class="glass rounded-xl overflow-hidden mb-12" id="servicesGrid">
+            <div class="px-6 py-4 border-b border-gray-700">
+                <h2 class="text-lg font-semibold">Services</h2>
+            </div>
+            <div class="divide-y divide-gray-700">
+                <% sites.forEach((site, index)=> { %>
+                    <div class="px-6 py-4 status-card opacity-0" data-index="<%= index %>">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="<%= 
+                                        site.status === 'operational' ? 'text-green-400' : 
+                                        site.status === 'degraded' ? 'text-yellow-400' : 
+                                        'text-red-400' %>">
+                                    <i class="fas <%= 
+                                            site.status === 'operational' ? 'fa-check-circle' : 
+                                            site.status === 'degraded' ? 'fa-exclamation-triangle' : 
+                                            'fa-times-circle' %>"></i>
+                                </div>
+                                <h3 class="font-medium">
+                                    <%= site.name %>
+                                </h3>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="text-sm text-gray-400">
+                                    <%= site.responseTime %>ms
+                                </span>
+                                <span class="px-2 py-1 text-xs rounded-full glass <%= 
+                                        site.status === 'operational' ? 'text-green-400' : 
+                                        site.status === 'degraded' ? 'text-yellow-400' : 
+                                        'text-red-400' %>">
+                                    <%= site.status.charAt(0).toUpperCase() + site.status.slice(1) %>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="w-full bg-gray-700 rounded-full h-1.5">
+                                <div class="h-1.5 rounded-full <%= 
+                                        site.status === 'operational' ? 'bg-green-400' : 
+                                        site.status === 'degraded' ? 'bg-yellow-400' : 
+                                        'bg-red-400' %>">
+                                </div>
+                            </div>
+                            <p class="mt-1 text-sm text-gray-400">
+                                <%= site.uptime %>% uptime
+                            </p>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+
+
+
+        <!-- Incidents -->
+        <div class="glass rounded-xl overflow-hidden mb-12" id="incidentsSection">
+            <div class="px-6 py-4 border-b border-gray-700">
                 <div class="px-6 py-4 border-b border-gray-700">
-                    <h2 class="text-lg font-semibold">Past Incidents</h2>
+                    <h2 class="text-lg font-semibold flex items-center space-x-2">
+                        <i class="fas fa-exclamation-triangle text-yellow-400"></i>
+                        <span>Past Incidents</span>
+                    </h2>
                 </div>
                 <div class="divide-y divide-gray-700">
                     <% if (incidents.length === 0) { %>
-                        <div class="px-6 py-4 text-gray-400">
-                            No incidents reported in the last 90 days.
+                        <div class="px-6 py-8 text-center text-gray-400">
+                            <i class="fas fa-check-circle text-4xl mb-3"></i>
+                            <p>No incidents reported in the last 90 days.</p>
                         </div>
                     <% } else { %>
                         <% incidents.forEach((incident, index) => { %>
-                            <div class="px-6 py-4 incident-item opacity-0" data-index="<%= index %>">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-medium"><%= incident.site.name %></h4>
-                                        <p class="mt-1 text-sm text-gray-400"><%= incident.message %></p>
-                                    </div>
-                                    <div class="flex flex-col items-end">
-                                        <span class="px-2 py-1 text-xs rounded-full glass <%= 
-                                            incident.status === 'resolved' ? 'text-green-400' :
-                                            incident.status === 'investigating' ? 'text-yellow-400' :
-                                            'text-blue-400' %>">
-                                            <%= incident.status.charAt(0).toUpperCase() + incident.status.slice(1) %>
-                                        </span>
-                                        <time class="mt-1 text-sm text-gray-400">
-                                            <%= new Date(incident.startTime).toLocaleString() %>
-                                        </time>
+                            <div class="px-6 py-6 incident-item opacity-0 hover:bg-gray-800/30 transition-all duration-300" data-index="<%= index %>">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <div class="flex items-center space-x-2">
+                                            <h4 class="font-medium text-lg">
+                                                <%= incident.site ? incident.site.name : 'Unknown Site' %>
+                                            </h4>
+                                            <span class="px-3 py-1 text-xs rounded-full glass <%= 
+                                                incident.status === 'resolved' ? 'text-green-400 border border-green-400/20' :
+                                                incident.status === 'investigating' ? 'text-yellow-400 border border-yellow-400/20' :
+                                                'text-blue-400 border border-blue-400/20' %>">
+                                                <%= incident.status.charAt(0).toUpperCase() + incident.status.slice(1) %>
+                                            </span>
+                                        </div>
+                                        <p class="text-sm text-gray-300 mt-2">
+                                            <%= incident.message %>
+                                        </p>
+                                        <div class="flex items-center space-x-4 mt-3 text-sm text-gray-400">
+                                            <div class="flex items-center space-x-2">
+                                                <i class="fas fa-clock"></i>
+                                                <span>Started: <%= new Date(incident.startTime).toLocaleString() %></span>
+                                            </div>
+                                            <% if (incident.status === 'resolved' && incident.resolvedTime) { %>
+                                                <div class="flex items-center space-x-2 text-green-400">
+                                                    <i class="fas fa-check-circle"></i>
+                                                    <span>Resolved: <%= new Date(incident.resolvedTime).toLocaleString() %></span>
+                                                </div>
+                                            <% } %>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -352,54 +489,73 @@
                 </div>
             </div>
         </div>
-    </body>
-    <!-- Update GSAP animations -->
-    <script>
-        gsap.to("#statusOverview", {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out"
-        });
-    
-        gsap.to("#servicesGrid", {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.3,
-            ease: "power3.out"
-        });
-    
-        gsap.to(".status-card", {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: "power3.out"
-        });
-    
-        gsap.to("#incidentsSection", {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.6,
-            ease: "power3.out"
-        });
-        
-        gsap.to(".incident-item", {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: "power3.out"
-        });
-    
-        // Add countdown timer
-        let countdown = 60;
-        const countdownElement = document.getElementById('countdown');
-        setInterval(() => {
-            countdown = countdown <= 0 ? 60 : countdown - 1;
-            countdownElement.textContent = countdown;
-        }, 1000);
-    </script>
+    </div>
+</body>
+<!-- Update GSAP animations -->
+<script>
+    gsap.to("#statusOverview", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out"
+    });
+
+    gsap.to("#servicesGrid", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.3,
+        ease: "power3.out"
+    });
+
+    gsap.to(".status-card", {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power3.out"
+    });
+
+    gsap.to("#incidentsSection", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.6,
+        ease: "power3.out"
+    });
+
+    gsap.to(".incident-item", {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power3.out"
+    });
+
+    // Add countdown timer
+    let countdown = 60;
+    const countdownElement = document.getElementById('countdown');
+    setInterval(() => {
+        countdown = countdown <= 0 ? 60 : countdown - 1;
+        countdownElement.textContent = countdown;
+    }, 1000);
+
+    // Add maintenance items animation
+    gsap.to("#maintenanceSection", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.45,
+        ease: "power3.out"
+    });
+
+    gsap.to(".maintenance-item", {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power3.out"
+    });
+</script>
+
 </html>
